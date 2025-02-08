@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="stat"><h1 class="text">
+
+
+    </h1></div>
+    <div class="casing">
+        <div class="pet">
+            <img class='img'src='./src/me.png'/>
+        </div>
+        <div class="lvl">
+            <p>lvl:<p>
+            <p id="number">1</p>
+        </div>
+        <div class="hunger">
+            <div class="icon">
+                <img class='img2'src='./src/food.png'/>
+            </div>
+            <div class="bar">
+                <div id="fill">
+                    
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    <style>
+        .img2{
+            height: 14px;
+            object-fit: cover;
+            width: 30px;
+        }
+        .casing{
+            background-color: rgb(255, 74, 122);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+            border-radius: 15px;
+            padding: 15px;
+            gap: 5px;
+        }
+        .pet{
+             background-color: rgb(255, 136, 204);
+             padding: 15px;
+             width: 60px;
+             border-radius: 10px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+        }
+        .number{
+            color: rgb(255, 255, 255);
+        }
+        .lvl{
+            background-color: rgb(205, 1, 62);
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .hunger{
+            background-color: azure;
+            display: flex;
+        }
+        .icon{
+            background-color: rgb(188, 0, 56);
+        }
+        .bar{
+            background-color: rgb(105, 105, 105);
+            width: 60px;
+        }
+        #fill{
+            background-color: greenyellow;
+            width: 60px;
+            height: 17px;
+        }
+
+
+    </style>
+</body>
+<script>
+
+ 
+
+    var f = document.getElementById('fill')
+    var food = 60;
+    var start = false;
+    var lvl = 1
+
+    function Feed(){
+
+        if(start){         
+            if (food<50){
+                f.style.width = food +'px';
+                food = food+10;
+            } else if(food>50){
+            f.style.width = 60 +'px';
+        
+}
+
+        } 
+    }
+
+    function Hungry() {     
+        start = true;    
+        setTimeout(function() {
+            f.style.width = food +'px';   
+            food--;                    
+            if (food > 1 ) {           
+            Hungry();              
+            } else if (food <= 1){
+            document.body.innerHTML ='perdemo'
+            }                 
+        }, 3000)
+    }
+
+   Hungry();
+
+    function lvlup(){
+        document.getElementById("number").innerHTML = lvl+1;
+        lvl++
+    };
+
+    const oAuth = "YourOauthHere"
+const nick = `qualquerum`
+const channel = "vc_escolhe";
+
+const socket = new WebSocket("wss://irc-ws.chat.twitch.tv:443");
+    
+socket.addEventListener('open', () => {
+    socket.send(`PASS oauth:${oAuth}`);
+    socket.send(`NICK ${nick}`)
+    socket.send(`JOIN #${channel}`)
+})
+
+socket.addEventListener('message', (event) => {
+    console.count(event.data);
+    Feed();
+})
+
+    
+
+    
+
+
+</script>
+</html>
