@@ -133,8 +133,20 @@
         lvl++
     };
 
-    const oAuth = "YourOauthHere"
+/*
+autorizar conexão com a twitch dev
+criar um novo aplicativo com server no http://localhost:3000
+copiar o client id
+ir para esse link:
+https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=YOURAPPCLIENTID&redirect_uri=http://localhost:3000&scope=channel:manage:redemptions+channel:read:redemptions+channel:read:subscriptions+moderator:read:chatters+channel:read:hype_train+bits:read
+substituir o YOUAPPCLIENTID por seu client id 
+aperte enter
+atorize
+mesmo que dê erro, vai aparecer no link #access_token = ___________, você copia tudo entre o = e o & e cola no YourOautHere abaixo
+*/
+const oAuth = "YourOauthHere"
 const nick = `qualquerum`
+//bota um canal no vc escolhe
 const channel = "vc_escolhe";
 
 const socket = new WebSocket("wss://irc-ws.chat.twitch.tv:443");
